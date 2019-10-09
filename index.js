@@ -92,10 +92,10 @@ const sdebounce = (fn, stream) => {
 };
 
 module.exports = {
-  map: smap,
-  scan: sscan,
-  merge: smerge,
-  startWith: sstartWith,
-  distinctUntilChanged: sdistinctUntilChanged,
-  debounce: sdebounce
+  smap,
+  sscan,
+  smerge,
+  sstartWith,
+  sdistinctUntilChanged,
+  sdebounce
 };

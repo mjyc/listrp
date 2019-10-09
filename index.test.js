@@ -1,13 +1,18 @@
-const { map, merge, debounce, distinctUntilChanged } = require("./index.js");
+const {
+  smap,
+  smerge,
+  sdebounce,
+  sdistinctUntilChanged
+} = require("./index.js");
 
-test("map", () => {
+test("smap", () => {
   const input = [{ stamp: 0, value: 0 }, { stamp: 1, value: 1 }];
-  const output = map(x => x + 1, input);
+  const output = smap(x => x + 1, input);
   const expected = [{ stamp: 0, value: 1 }, { stamp: 1, value: 2 }];
   expect(output).toEqual(expected);
 });
 
-test("merge", () => {
+test("smerge", () => {
   const input1 = [
     { stamp: 0, value: 0 },
     { stamp: 3, value: 1 },
@@ -23,7 +28,7 @@ test("merge", () => {
     { stamp: 5, value: 7 },
     { stamp: 8, value: 8 }
   ];
-  const output = merge(input1, input2, input3);
+  const output = smerge(input1, input2, input3);
   const expected = [
     { stamp: 0, value: 0 },
     { stamp: 1, value: 3 },
@@ -38,7 +43,7 @@ test("merge", () => {
   expect(output).toEqual(expected);
 });
 
-test("debounce", () => {
+test("sdebounce", () => {
   const input = [
     { stamp: 0, value: 0 },
     { stamp: 10, value: 1 },
@@ -51,7 +56,7 @@ test("debounce", () => {
     { stamp: 80, value: 8 },
     { stamp: 90, value: 9 }
   ];
-  const output = debounce(x => x * 2, input);
+  const output = sdebounce(x => x * 2, input);
   const expected = [
     { stamp: 0, value: 0 },
     { stamp: 12, value: 1 },
@@ -74,7 +79,7 @@ test("debounce", () => {
     { stamp: 80, value: 8 },
     { stamp: 90, value: 9 }
   ];
-  const output2 = debounce(x => 5, input2);
+  const output2 = sdebounce(x => 5, input2);
   const expected2 = [
     { stamp: 5, value: 0 },
     { stamp: 15, value: 1 },
@@ -90,7 +95,7 @@ test("debounce", () => {
   expect(output2).toEqual(expected2);
 });
 
-describe("distinctUntilChanged", () => {
+describe("sdistinctUntilChanged", () => {
   test("removing duplicates", () => {
     const expected = [
       { stamp: 0, value: 0 },
@@ -111,7 +116,7 @@ describe("distinctUntilChanged", () => {
       { stamp: 80, value: 4 },
       { stamp: 90, value: 4 }
     ];
-    const actual = distinctUntilChanged((a, b) => a === b, input);
+    const actual = sdistinctUntilChanged((a, b) => a === b, input);
     expect(actual).toEqual(expected);
   });
 
@@ -122,7 +127,7 @@ describe("distinctUntilChanged", () => {
       { stamp: 0, value: 1 },
       { stamp: 10, value: 1 }
     ];
-    const actual = distinctUntilChanged((a, b) => a === b, input);
+    const actual = sdistinctUntilChanged((a, b) => a === b, input);
     expect(actual).toEqual(expected);
   });
 });
