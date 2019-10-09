@@ -1,13 +1,44 @@
-const { map, debounce, distinctUntilChanged } = require("./index.js");
+const { map, merge, debounce, distinctUntilChanged } = require("./index.js");
 
-test("map", async () => {
+test("map", () => {
   const input = [{ stamp: 0, value: 0 }, { stamp: 1, value: 1 }];
   const output = map(x => x + 1, input);
   const expected = [{ stamp: 0, value: 1 }, { stamp: 1, value: 2 }];
   expect(output).toEqual(expected);
 });
 
-test("debounce", async () => {
+test("merge", () => {
+  const input1 = [
+    { stamp: 0, value: 0 },
+    { stamp: 3, value: 1 },
+    { stamp: 6, value: 2 }
+  ];
+  const input2 = [
+    { stamp: 1, value: 3 },
+    { stamp: 4, value: 4 },
+    { stamp: 7, value: 5 }
+  ];
+  const input3 = [
+    { stamp: 2, value: 6 },
+    { stamp: 5, value: 7 },
+    { stamp: 8, value: 8 }
+  ];
+  const output = merge(input1, input2, input3);
+  const expected = [
+    { stamp: 0, value: 0 },
+    { stamp: 1, value: 3 },
+    { stamp: 2, value: 6 },
+    { stamp: 3, value: 1 },
+    { stamp: 4, value: 4 },
+    { stamp: 5, value: 7 },
+    { stamp: 6, value: 2 },
+    { stamp: 7, value: 5 },
+    { stamp: 8, value: 8 }
+  ];
+  expect(output).toEqual(expected);
+});
+
+test("debounce", () => {
   const input = [
     { stamp: 0, value: 0 },
     { stamp: 10, value: 1 },

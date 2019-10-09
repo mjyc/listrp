@@ -41,10 +41,9 @@ const sscan = (reducer, seed, stream) => {
   );
 };
 
-const smerge = () => {
-  const streams = arguments;
-  // TODO: test
-  return sortBy(concat(...streams), (a, b) => a < b, x => x.stamp);
+const smerge = (...argumnets) => {
+  const events = reduce((prev, x) => concat(prev, x), [], argumnets);
+  return sortBy("stamp", events);
 };
 
 const sstartWith = (x, stream) => {
@@ -95,6 +94,7 @@ const sdebounce = (fn, stream) => {
 module.exports = {
   map: smap,
   scan: sscan,
+  merge: smerge,
   startWith: sstartWith,
   distinctUntilChanged: sdistinctUntilChanged,
   debounce: sdebounce
