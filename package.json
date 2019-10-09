@@ -1,17 +1,16 @@
 {
   "name": "listrp",
-  "description": "A probabilistic reactive stream library for JavaScript",
-  "version": "0.0.8",
+  "description": "Reactive programming as functional programming over list",
+  "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --testPathIgnorePatterns /demos/ /node_modules/"
+    "test": "jest"
   },
   "dependencies": {
-    "@cycle/time": "0.19.0",
-    "lodash": "^4.17.15",
+    "lodash": "4.17.15",
     "xstream": "11.11.0"
   },
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^24.9.0"
   }
 }
