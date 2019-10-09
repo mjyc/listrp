@@ -1,13 +1,13 @@
-const { smap, sdebounce, sdistinctUntilChanged } = require("./index.js");
+const { map, debounce, distinctUntilChanged } = require("./index.js");
 
-test("smap", async () => {
+test("map", async () => {
   const input = [{ stamp: 0, value: 0 }, { stamp: 1, value: 1 }];
-  const output = smap(x => x + 1, input);
+  const output = map(x => x + 1, input);
   const expected = [{ stamp: 0, value: 1 }, { stamp: 1, value: 2 }];
   expect(output).toEqual(expected);
 });
 
-test("sdebounce", async () => {
+test("debounce", async () => {
   const input = [
     { stamp: 0, value: 0 },
     { stamp: 10, value: 1 },
@@ -20,7 +20,7 @@ test("sdebounce", async () => {
     { stamp: 80, value: 8 },
     { stamp: 90, value: 9 }
   ];
-  const output = sdebounce(x => x * 2, input);
+  const output = debounce(x => x * 2, input);
   const expected = [
     { stamp: 0, value: 0 },
     { stamp: 12, value: 1 },
@@ -43,7 +43,7 @@ test("sdebounce", async () => {
     { stamp: 80, value: 8 },
     { stamp: 90, value: 9 }
   ];
-  const output2 = sdebounce(x => 5, input2);
+  const output2 = debounce(x => 5, input2);
   const expected2 = [
     { stamp: 5, value: 0 },
     { stamp: 15, value: 1 },
@@ -59,7 +59,7 @@ test("sdebounce", async () => {
   expect(output2).toEqual(expected2);
 });
 
-describe("sdistinctUntilChanged", () => {
+describe("distinctUntilChanged", () => {
   test("removing duplicates", () => {
     const expected = [
       { stamp: 0, value: 0 },
@@ -80,7 +80,7 @@ describe("sdistinctUntilChanged", () => {
       { stamp: 80, value: 4 },
       { stamp: 90, value: 4 }
     ];
-    const actual = sdistinctUntilChanged((a, b) => a === b, input);
+    const actual = distinctUntilChanged((a, b) => a === b, input);
     expect(actual).toEqual(expected);
   });
 
@@ -91,7 +91,7 @@ describe("sdistinctUntilChanged", () => {
       { stamp: 0, value: 1 },
       { stamp: 10, value: 1 }
     ];
-    const actual = sdistinctUntilChanged((a, b) => a === b, input);
+    const actual = distinctUntilChanged((a, b) => a === b, input);
     expect(actual).toEqual(expected);
   });
 });
