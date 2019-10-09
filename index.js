@@ -93,6 +93,8 @@ const sdebounce = (fn, stream) => {
 
 module.exports = {
   smap,
+  smapTo,
+  sfilter,
   sscan,
   smerge,
   sstartWith,
