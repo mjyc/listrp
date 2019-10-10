@@ -32,6 +32,10 @@ const convertRecordedStreamToXStream = (Time, recorded) => {
   });
 };
 
+const convertRecordedStreamToStream = (Time, recorded) => {
+  return fromXStream(convertRecordedStreamToXStream(Time, recorded));
+};
+
 const toXStream = stream => {
   let unsubscribe = () => {};
 
@@ -91,6 +95,7 @@ const mockTimeSource = (...args) => {
 module.exports = {
   convertRecordedStreamToCycleTimeRecordedStream,
   convertRecordedStreamToXStream,
+  convertRecordedStreamToStream,
   toXStream,
   fromXStream,
   mockTimeSource
