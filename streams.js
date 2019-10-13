@@ -169,6 +169,11 @@ function debounce(fn, stream) {
 // Extra - do not have matching functions in wppl/pstream.js
 //
 
+// https://github.com/rpominov/basic-streams/blob/master/packages/empty/index.ts
+function empty() {
+  return () => {};
+}
+
 // https://github.com/rpominov/basic-streams/blob/master/packages/multicast/index.ts
 // renamed to "share" to be consistent with rxjs
 function share(stream) {
@@ -308,6 +313,7 @@ module.exports = {
   sskip: skip,
   sdebounce: debounce,
   // extra
+  empty,
   share,
   fromIter,
   interval,

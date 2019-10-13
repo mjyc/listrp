@@ -91,7 +91,10 @@ const sdebounce = (fn, stream) => {
   }
 };
 
+const empty = () => [];
+
 module.exports = {
+  empty,
   smap,
   smapTo,
   sfilter,
