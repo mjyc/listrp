@@ -1,3 +1,5 @@
+// TODO: rename debounce2 to debounceFn
+
 const xs = require("xstream").default;
 const cycleTime = require("@cycle/time");
 const { share } = require("./streams");
