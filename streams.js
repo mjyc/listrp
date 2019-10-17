@@ -1,4 +1,4 @@
-// NOTE: add sdelay, sbuffer
+// NOTE: add sdelay, sbuffer, and sthrottle
 
 //
 // Event Streams

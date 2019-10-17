@@ -1,4 +1,4 @@
-// NOTE: missing sdelay and sbuffer
+// NOTE: missing sdelay, sbuffer, and sthrottle
 
 const map = require("lodash/fp/map");
 const filter = require("lodash/fp/filter");
