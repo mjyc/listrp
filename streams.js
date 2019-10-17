@@ -299,7 +299,8 @@ module.exports = {
     pairwise,
     take,
     skip,
-    debounce
+    debounce,
+    empty
   },
   // default
   smap: map,
@@ -314,10 +315,10 @@ module.exports = {
   stake: take,
   sskip: skip,
   sdebounce: debounce,
+  sempty: empty,
   // extra
-  empty,
+  interval,
   share,
   fromIter,
-  interval,
   createSubject
 };

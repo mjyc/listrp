@@ -1,4 +1,4 @@
-// NOTE: missing sdelay, sbuffer, and sthrottle
+// NOTE: missing spairwise, stake, sskip, sdelay, sbuffer, and sthrottle
 
 const map = require("lodash/fp/map");
 const filter = require("lodash/fp/filter");
@@ -48,6 +48,29 @@ const smerge = (...argumnets) => {
   return sortBy("stamp", events);
 };
 
+// TODO: update to handle multiple values
+const scombineLatest = (stream1, stream2) => {
+  return sfilter(
+    x => x[0] !== null && x[1] !== null,
+    sscan(
+      (prev, x) => {
+        if (x.index === 0) {
+          return [x.value, prev[1]];
+        } else if (x.index === 1) {
+          return [prev[0], x.value];
+        } else {
+          return prev;
+        }
+      },
+      [null, null],
+      smerge(
+        smap(x => ({ value: x, index: 0 }), stream1),
+        smap(x => ({ value: x, index: 1 }), stream2)
+      )
+    )
+  );
+};
+
 const sstartWith = (x, stream) => {
   return concat([{ stamp: 0, value: x }], stream);
 };
@@ -93,16 +116,18 @@ const sdebounce = (fn, stream) => {
   }
 };
 
-const empty = () => [];
+const sempty = () => [];
 
 module.exports = {
-  empty,
+  // default
   smap,
   smapTo,
   sfilter,
   sscan,
   smerge,
+  scombineLatest,
   sstartWith,
   sdistinctUntilChanged,
-  sdebounce
+  sdebounce,
+  sempty
 };
