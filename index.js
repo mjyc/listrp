@@ -1,4 +1,4 @@
-// TODO: add sdelay, sbuffer and rename sdebounce to sdebounceFn
+// NOTE: missing sdelay and sbuffer
 
 const map = require("lodash/fp/map");
 const filter = require("lodash/fp/filter");

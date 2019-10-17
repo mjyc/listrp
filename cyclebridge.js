@@ -1,5 +1,3 @@
-// TODO: rename debounce2 to debounceFn
-
 const xs = require("xstream").default;
 const cycleTime = require("@cycle/time");
 const { share } = require("./streams");
@@ -77,12 +75,16 @@ const mockTimeSource = (...args) => {
       ),
     assertEqual: (actual, expected, comparator) =>
       Time.assertEqual(toXStream(actual), toXStream(expected), comparator),
-    periodic: period => fromXStream(Time.periodic(period)),
-    run: Time.run,
-    _time: Time._time,
-    _scheduler: Time._scheduler,
-    debounce2: (fn, stream) => {
+    delay: (period, stream) => {
       const in$ = toXStream(stream);
+      return fromXStream(in$.compose(Time.delay(period)));
+    },
+    debounce: (fn, stream) => {
+      const in$ = toXStream(stream);
+      if (typeof fn === "number") {
+        // fn is period
+        return fromXStream(in$.compose(Time.debounce(fn)));
+      }
       return fromXStream(
         in$
           .map(x => {
@@ -90,7 +92,15 @@ const mockTimeSource = (...args) => {
           })
           .flatten()
       );
-    }
+    },
+    periodic: period => fromXStream(Time.periodic(period)),
+    throttle: (period, stream) => {
+      const in$ = toXStream(stream);
+      return fromXStream(in$.compose(Time.throttle(period)));
+    },
+    run: Time.run,
+    _time: Time._time,
+    _scheduler: Time._scheduler
   };
 };
 

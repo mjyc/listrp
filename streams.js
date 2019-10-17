@@ -1,4 +1,4 @@
-// TODO: add sdelay, sbuffer and rename sdebounce to sdebounceFn
+// NOTE: add sdelay, sbuffer
 
 //
 // Event Streams
