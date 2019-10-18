@@ -96,9 +96,10 @@ const sdebounce = (fn, stream) => {
   } else {
     const { candidate, arr } = reduce(
       ({ candidate, arr }, { stamp, value }) => {
+        const period = fn(value);
         return {
           candidate: {
-            stamp: stamp + fn(value),
+            stamp: stamp + (period < 0 ? 0 : period),
             value: value
           },
           arr:
