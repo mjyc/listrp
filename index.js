@@ -1,4 +1,4 @@
-// NOTE: missing spairwise, stake, sskip, sdelay, sbuffer, and sthrottle
+// NOTE: missing spairwise, stake, sskip, sbuffer, and sthrottle
 
 const map = require("lodash/fp/map");
 const filter = require("lodash/fp/filter");
@@ -90,6 +90,13 @@ const sdistinctUntilChanged = (compare, stream) => {
   }
 };
 
+const sdelay = (period, stream) => {
+  return map(
+    ({ stamp, value }) => ({ stamp: stamp + (period < 0 ? 0 : period), value }),
+    stream
+  );
+};
+
 const sdebounce = (fn, stream) => {
   if (stream.length < 2) {
     return stream;
@@ -129,6 +136,7 @@ module.exports = {
   scombineLatest,
   sstartWith,
   sdistinctUntilChanged,
+  sdelay,
   sdebounce,
   sempty
 };
