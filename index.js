@@ -49,26 +49,49 @@ const smerge = (...argumnets) => {
 };
 
 // TODO: update to handle multiple values
-const scombineLatest = (stream1, stream2) => {
-  return sfilter(
-    x => x[0] !== null && x[1] !== null,
-    sscan(
-      (prev, x) => {
-        if (x.index === 0) {
-          return [x.value, prev[1]];
-        } else if (x.index === 1) {
-          return [prev[0], x.value];
-        } else {
-          return prev;
-        }
-      },
-      [null, null],
-      smerge(
-        smap(x => ({ value: x, index: 0 }), stream1),
-        smap(x => ({ value: x, index: 1 }), stream2)
+const scombineLatest = (stream1, stream2, stream3) => {
+  return typeof stream3 === "undefined"
+    ? sfilter(
+        x => x[0] !== null && x[1] !== null,
+        sscan(
+          (prev, x) => {
+            if (x.index === 0) {
+              return [x.value, prev[1]];
+            } else if (x.index === 1) {
+              return [prev[0], x.value];
+            } else {
+              return prev;
+            }
+          },
+          [null, null],
+          smerge(
+            smap(x => ({ value: x, index: 0 }), stream1),
+            smap(x => ({ value: x, index: 1 }), stream2)
+          )
+        )
       )
-    )
-  );
+    : sfilter(
+        x => x[0] !== null && x[1] !== null && x[2] !== null,
+        sscan(
+          (prev, x) => {
+            if (x.index === 0) {
+              return [x.value, prev[1], prev[2]];
+            } else if (x.index === 1) {
+              return [prev[0], x.value, prev[2]];
+            } else if (x.index === 2) {
+              return [prev[0], prev[1], x.value];
+            } else {
+              return prev;
+            }
+          },
+          [null, null, null],
+          smerge(
+            smap(x => ({ value: x, index: 0 }), stream1),
+            smap(x => ({ value: x, index: 1 }), stream2),
+            smap(x => ({ value: x, index: 2 }), stream3)
+          )
+        )
+      );
 };
 
 const sstartWith = (x, stream) => {
