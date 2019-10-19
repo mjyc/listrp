@@ -147,6 +147,10 @@ const sdebounce = (fn, stream) => {
   }
 };
 
+const sbuffer = (windowSize, stream) => {
+  return [];
+};
+
 const sempty = () => [];
 
 module.exports = {
@@ -161,5 +165,6 @@ module.exports = {
   sdistinctUntilChanged,
   sdelay,
   sdebounce,
+  sbuffer,
   sempty
 };
