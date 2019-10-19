@@ -1,3 +1,5 @@
+// NOTE: missing smapTo, sfilter, sscan, scombineLatest, sstartWith, sdelay, sempty tests
+
 const {
   smap,
   smerge,

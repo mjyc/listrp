@@ -48,7 +48,7 @@ const smerge = (...argumnets) => {
   return sortBy("stamp", events);
 };
 
-// TODO: update to handle multiple values
+// NOTE: only can handle up to 3 input streams
 const scombineLatest = (stream1, stream2, stream3) => {
   return typeof stream3 === "undefined"
     ? sfilter(
