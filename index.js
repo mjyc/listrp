@@ -1,4 +1,5 @@
-// NOTE: missing spairwise, stake, sskip, sbuffer, and sthrottle
+// IMPORTANT!! the current sbuffer implementation is just a placefolder
+// NOTE: missing spairwise, stake, sskip, and sthrottle
 
 const map = require("lodash/fp/map");
 const filter = require("lodash/fp/filter");
