@@ -12,8 +12,8 @@ const convertRecordedStreamToCycleTimeRecordedStream = recorded => {
 
 const convertCycleTimeRecordedStreamToRecordedStream = cycleTimeRecorded => {
   return cycleTimeRecorded.map(x => ({
-    value: x.value,
-    stamp: x.time
+    stamp: x.time,
+    value: x.value
   }));
 };
 
